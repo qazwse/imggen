@@ -31,7 +31,7 @@ func (i Image) At(x, y int) color.Color {
 	return color.RGBA{v, v, 255, 255}
 }
 
-func (i *Image) generate(fn func(int int) uint8) {
+func (i *Image) generate(fn func(int, int) uint8) {
 	for h := 0; h < i.height; h++ {
 		i.pixels[h] = make([]uint8, i.width)
 
@@ -45,7 +45,7 @@ func test1(x, y int) uint8 {
 	return uint8(x + y)
 }
 
-func makeimage(x, y int) {
+func makeimage(x, y int) Image {
 	m := Image{make([][]uint8, y), x, y, color.RGBAModel}
 	m.generate(test1)
 
